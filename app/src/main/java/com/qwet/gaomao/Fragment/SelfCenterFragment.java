@@ -50,7 +50,6 @@ public class SelfCenterFragment extends Fragment {
                 PopupWindow();
             }
         });
-
     }
 
     private void PopupWindow() {
