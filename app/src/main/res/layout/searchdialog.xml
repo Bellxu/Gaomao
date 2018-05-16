@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginRight="10px"
+        android:layout_marginLeft="10px"
+        android:id="@+id/msg_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:background="@mipmap/bg_nor"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="50px"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/mineInfo_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="115px"
+                android:src="@mipmap/icon_name" />
+
+            <EditText
+                android:id="@+id/mineInfo_name_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:hint="用户名"
+                android:textColor="#999999"
+                android:textSize="22px" />
+        </LinearLayout>
+        <View
+            android:id="@+id/mineinfo_line1"
+            android:layout_width="wrap_content"
+            android:layout_height="3px"
+            android:layout_marginLeft="115px"
+            android:layout_marginRight="115px"
+            android:layout_marginTop="10px"
+            android:background="@color/black"></View>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/mineInfo_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="115px"
+                android:layout_marginTop="25dp"
+                android:src="@mipmap/icon_phonenumber" />
+
+            <EditText
+                android:id="@+id/mineInfo_number_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/mineInfo_number"
+                android:background="@null"
+                android:hint="请输入手机号"
+                android:layout_marginTop="20dp"
+                android:textColor="#999999"
+                android:textSize="22px"/>
+        </LinearLayout>
+        <View
+            android:id="@+id/mineinfo_line2"
+            android:layout_width="match_parent"
+            android:layout_height="3px"
+            android:layout_marginLeft="115px"
+            android:layout_marginRight="115px"
+            android:layout_marginTop="10px"
+            android:background="@color/black"></View>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/mineInfo_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="115px"
+                android:layout_marginTop="50px"
+                android:src="@mipmap/icon_verificationcode" />
+
+            <EditText
+                android:id="@+id/mineInfo_code_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="40px"
+                android:layout_toRightOf="@+id/mineInfo_number"
+                android:background="@null"
+                android:hint="请输入图片中的验证码"
+                android:textColor="#999999"
+                android:textSize="22px"/>
+
+
+
+            <ImageView
+                android:layout_marginRight="115px"
+                android:layout_toRightOf="@id/mineInfo_code_edit"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20px"
+                android:layout_marginLeft="20px"
+                android:id="@+id/randomimage"
+                android:layout_width="140px"
+                android:layout_height="60px"
+                android:src="@drawable/ic_launcher_background"/>
+        </LinearLayout>
+        <View
+            android:id="@+id/mineinfo_line3"
+            android:layout_width="match_parent"
+            android:layout_height="3px"
+            android:layout_marginLeft="115px"
+            android:layout_marginRight="115px"
+            android:layout_marginTop="10px"
+            android:background="@color/black"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/mineInfo_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="115px"
+                android:layout_marginTop="50px"
+                android:src="@mipmap/icon_note"/>
+
+            <EditText
+                android:id="@+id/mineInfo_note_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="40px"
+                android:layout_toRightOf="@+id/mineInfo_number"
+                android:background="@null"
+                android:hint="请输入手机收到的验证码"
+                android:textColor="#999999"
+                android:textSize="22px"/>
+
+
+
+            <ImageView
+                android:layout_marginRight="115px"
+                android:layout_toRightOf="@id/mineInfo_code_edit"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20px"
+                android:layout_marginLeft="20px"
+                android:id="@+id/btn_send_code"
+                android:layout_width="140px"
+                android:layout_height="60px"
+                android:src="@drawable/btn_send_nor"/>
+
+
+        </LinearLayout>
+        <View
+            android:id="@+id/mineinfo_line4"
+            android:layout_width="match_parent"
+            android:layout_height="3px"
+            android:layout_marginLeft="115px"
+            android:layout_marginRight="115px"
+            android:layout_marginTop="10px"
+            android:layout_marginBottom="70px"
+            android:background="@color/black"></View>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
