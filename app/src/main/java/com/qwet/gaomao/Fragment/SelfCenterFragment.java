@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qwet.gaomao.R;
@@ -33,13 +32,57 @@ public class SelfCenterFragment extends Fragment {
     private EditText code_edit;
     private EditText pswed;
     private String userpsw;
+    private Button get_verification;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.selfcenter_fragment, container, false);
+        initFBC(view);
+        initClick();
         initData(view);
         return view;
+    }
+
+    private void initClick() {
+        get_verification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Retrofit retrofit = new Retrofit.Builder()
+//                                .baseUrl(Constants.BASE_URL)
+//                                .build();
+//
+//                        GaoMaoService service = retrofit.create(GaoMaoService.class);
+//                         service.getVerificationCodeBean().enqueue(new Callback<verificationCodeBean>() {
+//                             @Override
+//                             public void onResponse(Call<verificationCodeBean> call, Response<verificationCodeBean> response) {
+//
+//                             }
+//
+//                             @Override
+//                             public void onFailure(Call<verificationCodeBean> call, Throwable t) {
+//
+//                             }
+//                         });
+//
+//                    }
+//                }).start();
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                }).start();
+            }
+        });
+    }
+
+    private void initFBC(View view) {
+        get_verification = (Button) view.findViewById(R.id.get_verification);
     }
 
     private void initData(View view) {
@@ -118,8 +161,6 @@ public class SelfCenterFragment extends Fragment {
             if (code.equalsIgnoreCase(Code)) {
                 Toast.makeText(getContext(), "验证码正确", Toast.LENGTH_SHORT).show();
                 //网络请求
-
-
 
 
 
