@@ -16,9 +16,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.qwet.gaomao.Bean.verificationCodeBean;
+import com.qwet.gaomao.Constants;
+import com.qwet.gaomao.GaoMaoService;
 import com.qwet.gaomao.R;
 import com.qwet.gaomao.Utils.RandomCodeUtils;
 import com.qwet.gaomao.Utils.ToastUtils;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by xu on 2018/5/12.
@@ -33,6 +42,7 @@ public class SelfCenterFragment extends Fragment {
     private EditText pswed;
     private String userpsw;
     private Button get_verification;
+    private EditText phone_number;
 
     @Nullable
     @Override
@@ -48,32 +58,31 @@ public class SelfCenterFragment extends Fragment {
         get_verification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Retrofit retrofit = new Retrofit.Builder()
-//                                .baseUrl(Constants.BASE_URL)
-//                                .build();
-//
-//                        GaoMaoService service = retrofit.create(GaoMaoService.class);
-//                         service.getVerificationCodeBean().enqueue(new Callback<verificationCodeBean>() {
-//                             @Override
-//                             public void onResponse(Call<verificationCodeBean> call, Response<verificationCodeBean> response) {
-//
-//                             }
-//
-//                             @Override
-//                             public void onFailure(Call<verificationCodeBean> call, Throwable t) {
-//
-//                             }
-//                         });
-//
-//                    }
-//                }).start();
-
+                final String phoneNumber = phone_number.getText().toString().trim();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+
+                        GaoMaoService service = retrofit.create(GaoMaoService.class);
+                        Call<verificationCodeBean> call = service.getVerificationCodeBean(phoneNumber);
+                        call.enqueue(new Callback<verificationCodeBean>() {
+                            @Override
+                            public void onResponse(Call<verificationCodeBean> call, Response<verificationCodeBean> response) {
+                                if (response.body().getSendSmsResponse() != null) {
+                                    String message = response.body().getSendSmsResponse().getMessage();
+                                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    String warning = response.body().getWarning();
+                                    Toast.makeText(getContext(), warning, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<verificationCodeBean> call, Throwable t) {
+
+                            }
+                        });
 
                     }
                 }).start();
@@ -83,6 +92,7 @@ public class SelfCenterFragment extends Fragment {
 
     private void initFBC(View view) {
         get_verification = (Button) view.findViewById(R.id.get_verification);
+        phone_number = (EditText) view.findViewById(R.id.phone_number);
     }
 
     private void initData(View view) {
@@ -107,13 +117,13 @@ public class SelfCenterFragment extends Fragment {
                 final View view = from.inflate(R.layout.searchdialog, null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-//用户名
+                //用户名
                 EditText nameed = view.findViewById(R.id.mineInfo_name_edit);
                 username = nameed.getText().toString().trim();
-//密码
+                //密码
                 pswed = view.findViewById(R.id.mineInfo_number_edit);
                 userpsw = pswed.getText().toString().trim();
-//随机数
+                //随机数
                 code_edit = view.findViewById(R.id.mineInfo_code_edit);
                 random = view.findViewById(R.id.randomimage);
                 random.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +141,7 @@ public class SelfCenterFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ToastUtils.ToastShow(getContext(), "点击确定了");
-//                        register();
+                        //                        register();
                         dialog.dismiss();
                     }
                 });
@@ -154,23 +164,13 @@ public class SelfCenterFragment extends Fragment {
         Log.e("codeStr", Code);
         if (null == Code || TextUtils.isEmpty(Code)) {
             Toast.makeText(getContext(), "请输入验证码", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
 
             String code = RandomCodeUtils.getInstance().getCode();
             Log.e("code", code);
             if (code.equalsIgnoreCase(Code)) {
                 Toast.makeText(getContext(), "验证码正确", Toast.LENGTH_SHORT).show();
                 //网络请求
-
-
-
-
-
-
-
-
-
-
 
 
             } else {
