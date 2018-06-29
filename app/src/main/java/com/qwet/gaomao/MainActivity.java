@@ -6,7 +6,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.qwet.gaomao.EventBus.SelfCenterEvent;
 import com.qwet.gaomao.Fragment.SelfCenterFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
         initFragment();
 //        showFrament();
         intClick();
+        EventBus.getDefault().register(this);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void changetest(SelfCenterEvent event){
+        String message = event.getMessage();
+        self_center.setText(message);
     }
 
     private void intClick() {
@@ -48,5 +61,11 @@ public class MainActivity extends AppCompatActivity {
         self_center = (TextView) findViewById(R.id.self_center);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
 }

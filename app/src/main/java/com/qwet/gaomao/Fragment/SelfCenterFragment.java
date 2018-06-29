@@ -14,9 +14,12 @@ import android.widget.Toast;
 import com.qwet.gaomao.Bean.LogonOnBean;
 import com.qwet.gaomao.Bean.verificationCodeBean;
 import com.qwet.gaomao.Constants;
+import com.qwet.gaomao.EventBus.SelfCenterEvent;
 import com.qwet.gaomao.GaoMaoService;
 import com.qwet.gaomao.R;
 import com.qwet.gaomao.logOnUser;
+
+import org.greenrobot.eventbus.EventBus;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,8 +34,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SelfCenterFragment extends Fragment {
 
     private Button get_verification;
-    private Button logon_on;//注册
-    private Button logon_in;//按钮
+    //注册
+    private Button logon_on;
+    //登陆
+    private Button logon_in;
     private EditText phone_number;
     private EditText verify_code;
     private EditText user_name;
@@ -50,6 +55,16 @@ public class SelfCenterFragment extends Fragment {
     private void initClick() {
         setGet_verificationClick();
         setLogOnClick();
+        setLogInClick();
+    }
+
+    private void setLogInClick() {
+        logon_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EventBus.getDefault().post(new SelfCenterEvent("我的"));
+            }
+        });
     }
 
     private void setLogOnClick() {
